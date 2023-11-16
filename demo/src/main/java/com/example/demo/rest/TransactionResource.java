@@ -16,11 +16,16 @@ public class TransactionResource {
 
     @GetMapping("/transactions")
     public ResponseEntity getMsg(){
-        return ResponseEntity.ok(transactionService.getMessage());
+        return ResponseEntity.ok(transactionService.getAll());
     }
 
     @PostMapping("/transactions")
     public ResponseEntity create(@RequestBody Transaction transaction){
-        return ResponseEntity.ok(transactionService.save(transaction));
+        return ResponseEntity.ok(transactionService.saveExch(transaction));
+    }
+
+    @PutMapping("/transactions")
+    public ResponseEntity update(@RequestBody Transaction transaction){
+        return ResponseEntity.ok(transactionService.update(transaction));
     }
 }

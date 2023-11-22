@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.example.demo.domain.enums.Status;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -16,6 +17,36 @@ public class User implements Serializable {
     private String userName;
     private  String password;
     private  String email;
+
+    private String firstName;
+    private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",

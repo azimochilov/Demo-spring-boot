@@ -20,7 +20,6 @@ public class User implements Serializable {
 
     private String firstName;
     private String lastName;
-    @Enumerated(EnumType.STRING)
     private Status status;
 
     public String getFirstName() {

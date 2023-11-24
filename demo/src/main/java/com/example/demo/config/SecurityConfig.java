@@ -1,5 +1,7 @@
 package com.example.demo.config;
 
+import com.example.demo.security.JwtConfigurer;
+import com.example.demo.security.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -14,8 +16,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
  private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(@Lazy UserDetailsService userDetailsService) {
+ private final JwtTokenProvider jwtTokenProvider;
+    public SecurityConfig(@Lazy UserDetailsService userDetailsService, JwtTokenProvider jwtTokenProvider) {
         this.userDetailsService = userDetailsService;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
   /*  @Override
@@ -46,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
              .antMatchers("/api/students").permitAll()
              .anyRequest().authenticated()
              .and()
-             .httpBasic();
+             .apply(new JwtConfigurer(jwtTokenProvider));
     }
 /*
 @Bean

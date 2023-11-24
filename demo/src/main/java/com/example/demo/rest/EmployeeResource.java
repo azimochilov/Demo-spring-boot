@@ -1,11 +1,13 @@
 package com.example.demo.rest;
 
 import com.example.demo.domain.Employee;
+import com.example.demo.security.SecurityUtils;
 import com.example.demo.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -37,6 +39,7 @@ public class EmployeeResource {
     }
     @GetMapping("/employees/{name}")
     public ResponseEntity getAll(@PathVariable String name){
+        Optional<String> optional = SecurityUtils.getCurrentUserName();
         List<Employee> employee1 = employeeService.findByName(name);
         return ResponseEntity.ok(employee1);
     }
